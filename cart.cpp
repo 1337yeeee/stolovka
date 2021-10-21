@@ -1,4 +1,13 @@
-void cart(vector<Menu>& cart) {
+#include <iostream>
+#include <vector>
+#include <string>
+#include<fstream>
+#include<product.cpp>
+#include<choice.cpp>
+#include<cart.cpp>
+#include<payment.cpp>
+#include<showcart.cpp>
+void cart(vector<Product>& cart) {
     int posnumberr = 0, anwser = 0, amount = 0, decicion = 0;
     showmenu();
     cout << "What position would you like to add at cart?\n";
