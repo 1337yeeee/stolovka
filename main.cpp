@@ -1,103 +1,68 @@
 #include <iostream>
-void choice(); //Choice menu
-void cart(); //Add to cart
-void showmenu(); //Show menu(DB of goods)
-void orderhistory(); //Show history of orders(order history DB)
-void payment(); //Function for paying
-void showcart(); //Show what is in cart
-void issue(); //Funtion for issueing of order
+#include <vector>
+#include <string>
+#include<fstream>
 
-void main()
-{
-    choice();
-}
-void choice() {
-    int d = 0;
-    bool flag = true;
-    while (flag) {
-        std::cout << "What would you like to do?\n1.Show menu\n2.Add to cart\n3.Show cart\n4.Show order history\n5.Exit\n";
-        std::cin >> d;
-        switch (d) {
-        case 1: {
-            showmenu();
-            break;
-        }
-        case 2: {
-            showmenu();
-            cart();
-            break;
+using namespace std;
 
-        }
-        case 3: {
-            showcart();
-            break;
-        }
-        case 4: {
-            orderhistory();
-            break;
-        }
-        case 5: {
-            flag = false;
-            break;
-        }
-        }
+class Product {
+public:
+    string name;
+    int price;
+    int id;
+
+
+    Product(string _name, int _price, int _id = 0) {
+        name = _name;
+        price = _price;
+        id = _id;
     }
-}
 
-void cart() {
-    int p = 0, c = 0, a = 0, d = 0;
-    showmenu();
-    std::cout << "What position would you like to add at cart?\n";
-    std::cin >> p;
-    std::cout << "How many portions?\n";
-    std::cin >> a;
-    //Here information goes to DB of goods and decreases amount
-    //Here information goes to cart DB
-    while (c != 2) {
-        std::cout << "Would you like to add something else?\n1.Yes\n2.No\n";
-        std::cin >> c;
-        if (c == 1) {
-            cart();
-        }
+    //dobavlyaet object klassa Product v konets massiva
+    void addProduct(vector<Product>& massive, Product object) {
+        massive.push_back(object);
     }
-    std::cout << "Whould you like to pay the order or to do something else?\n1.Pay\n2.Something else\n";
-    std::cin >> d;
-    switch (d) {
-    case 1: {
-        payment();
-        break;
-    }
-    case 2: {
-        break;
-    }
-    }
-}
 
-void showmenu() {
-    //Here goods from DB of goods are withdrawn
-}
+    //sozdaet object klassa Product i dobavlyaet v konec massiva
+    void addProduct(vector<Product>& massive, string _name, int _price, int _id = 0) {
+        Product object(_name, _price, _id);
+        massive.push_back(object);
+    }
 
-void orderhistory() {
-    //Here order from order history DB are withdrawn
-}
+    /*udalyaet product po ego id
+    void deleteProduct(vector<Product>& massive, Product object) {
+        for (int i = 0; i < massive.size(); i++)
+            if (massive[i] == object)
+                massive.erase(massive.cbegin() + i);
+    }*/
 
-void payment() {
+    //if object a is equal to object b returns 1 else 0
+    int operator == (Product object) {
+        if (this->id == object.id) return 1;
+        else return 0;
+    }
+};
+
+
+void payment(vector<Product>& cart) {
     int sum = 0;
     //Here all goods in cart are withdrawn
-    std::cout << "Amount to pay: " << sum;
+    cout << "Amount to pay: " << sum << endl;;
     //Here goes payment
-    issue();
     //Here information from cart goes to DB of orders
+    ofstream orderfile;
+    orderfile.open("order.dbase", ofstream::app);
+    orderfile.write((char*)&cart, cart.size());
 }
 
-void showcart() {
+void showcart(vector<Product>& cart) {
     int pay;
     //Here information from cart is withdrawn
-    std::cout << "Whould you like to pay the order?\n1.Yes\n2.No\n";
-    std::cin >> pay;
+    cout << "Whould you like to pay the order?\n1.Yes\n2.No\n";
+    cin >> pay;
     switch (pay) {
     case1: {
-        payment();
+        payment(cart);
         break;
         }
 case2: {
@@ -107,6 +72,73 @@ case2: {
 
 }
 
-void issue() {
-    //Function of issueing an order
+void _cart(vector<Product>& cart) {
+    int posnumber = 0, anwser = 0, amount = 0, decicion = 0;
+    //Here list of Product is withdrawn
+    cout << "What position would you like to add at cart?\n";
+    cin >> posnumber;
+    cout << "How many portions?\n";
+    cin >> amount;
+    //Here information goes to DB of goods and decreases amount
+    //Here information goes to cart vector
+
+    while (anwser != 2) {
+        cout << "Would you like to add something else?\n1.Yes\n2.No\n";
+        cin >> anwser;
+        if (anwser == 1) {
+            _cart(cart);
+        }
+    }
+
+    cout << "Whould you like to pay the order or to do something else?\n1.Pay\n2.Something else\n";
+    cin >> decicion;
+    switch (decicion) {
+    case 1: {
+        payment(cart);
+        break;
+    }
+    case 2: {
+        break;
+    }
+    }
+}
+
+
+void choice() {
+    int decicion = 0;
+    bool flag = true;
+    vector<Product> cart;
+    while (flag) {
+        cout << "What would you like to do?\n1.Show menu\n2.Add to cart\n3.Show cart\n4.Show order history\n5.Exit\n";
+        cin >> decicion;
+        switch (decicion) {
+        case 1: {
+            //Here list of products is withdrawn
+            break;
+        }
+        case 2: {
+            //Here list of products is withdrawn
+            _cart(cart);
+            break;
+
+        }
+        case 3: {
+            //Here list of products in cart is withdrawn;
+            break;
+        }
+        case 4: {
+            //Here hostory of orders is withdrawn
+            break;
+        }
+        case 5: {
+            flag = false;
+            break;
+        }
+        }
+    }
+}
+int main()
+{
+    choice();
+    return 0;
 }
