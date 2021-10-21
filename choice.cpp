@@ -2,16 +2,15 @@
 #include <vector>
 #include <string>
 #include<fstream>
-#include<product.cpp>
-#include<choice.cpp>
-#include<cart.cpp>
-#include<payment.cpp>
-#include<showcart.cpp>
+#include"product.cpp"
+#include"cart.cpp"
+#include"payment.cpp"
+#include"showcart.cpp"
 void choice() {
     int decicion = 0;
-    bool flagOfVar = true;
-    vector<Product> cartOfVar;
-    while (flagOfVar) {
+    bool flag = true;
+    vector<Product> cart;
+    while (flag) {
         cout << "What would you like to do?\n1.Show menu\n2.Add to cart\n3.Show cart\n4.Show order history\n5.Exit\n";
         cin >> decicion;
         switch (decicion) {
@@ -34,7 +33,7 @@ void choice() {
             break;
         }
         case 5: {
-            flagOfVar = false;
+            flag = false;
             break;
         }
         }
