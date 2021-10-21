@@ -2,11 +2,8 @@
 #include <vector>
 #include <string>
 #include<fstream>
-#include<product.cpp>
-#include<choice.cpp>
-#include<cart.cpp>
-#include<payment.cpp>
-#include<showcart.cpp>
+#include"choice.cpp"
+
 
 using namespace std;
 
