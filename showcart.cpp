@@ -2,11 +2,10 @@
 #include <vector>
 #include <string>
 #include<fstream>
-#include<product.cpp>
-#include<choice.cpp>
-#include<cart.cpp>
-#include<payment.cpp>
-#include<showcart.cpp>
+#include"product.cpp"
+#include"choice.cpp"
+#include"cart.cpp"
+#include"payment.cpp"
 void showcart(vector<Product>& cart) {
     int pay;
     //Here information from cart is withdrawn
