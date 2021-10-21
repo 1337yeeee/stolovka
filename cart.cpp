@@ -2,11 +2,10 @@
 #include <vector>
 #include <string>
 #include<fstream>
-#include<product.cpp>
-#include<choice.cpp>
-#include<cart.cpp>
-#include<payment.cpp>
-#include<showcart.cpp>
+#include"product.cpp"
+#include"choice.cpp"
+#include"payment.cpp"
+#include"showcart.cpp"
 void cart(vector<Product>& cart) {
     int posnumberr = 0, anwser = 0, amount = 0, decicion = 0;
     showmenu();
@@ -19,7 +18,7 @@ void cart(vector<Product>& cart) {
 
     while (anwser != 2) {
         cout << "Would you like to add something else?\n1.Yes\n2.No\n";
-        cin >> anwserOfVar;
+        cin >> anwser;
         if (anwser == 1) {
             cart(cart);
         }
@@ -29,7 +28,7 @@ void cart(vector<Product>& cart) {
     cin >> decicion;
     switch (decicion) {
     case 1: {
-        paymentOfFunc(cart);
+        payment(cart);
         break;
     }
     case 2: {
