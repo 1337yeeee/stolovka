@@ -2,12 +2,11 @@
 #include <vector>
 #include <string>
 #include<fstream>
-#include<product.cpp>
-#include<choice.cpp>
-#include<cart.cpp>
-#include<payment.cpp>
-#include<showcart.cpp>
-void paymen(vector<Product>& cart) {
+#include"product.cpp"
+#include"choice.cpp"
+#include"cart.cpp"
+#include"showcart.cpp"
+    void payment(vector<Product>& cart) {
     int sum = 0;
     //Here all goods in cart are withdrawn
     cout << "Amount to pay: " << sum << endl;;
