@@ -1,23 +1,21 @@
 #include <iostream>
-#include <locale.h>
-void choice(); //Меню выбора
-void cart(); //Добавление в корзину
-void showmenu(); //Показать меню(БД товаров)
-void orderhistory(); //Показать историю заказов (БД истории)
-void payment(); //Функция оплаты
-void showcart(); //Показать что в корзине
-void issue(); //Фукнция выдачи заказа
+void choice(); //Choice menu
+void cart(); //Add to cart
+void showmenu(); //Show menu(DB of goods)
+void orderhistory(); //Show history of orders(order history DB)
+void payment(); //Function for paying
+void showcart(); //Show what is in cart
+void issue(); //Funtion for issueing of order
 
 void main()
 {
-    setlocale(LC_ALL, "russian");
     choice();
 }
 void choice() {
     int d = 0;
     bool flag = true;
     while (flag) {
-        std::cout << "Что вы хотите сделать?\n1.Посмотреть меню\n2.Добавть в корзину\n3.Посмотреть что в корзине\n4.Посмотреть историю заказов\n5.Выйти\n";
+        std::cout << "What would you like to do?\n1.Show menu\n2.Add to cart\n3.Show cart\n4.Show order history\n5.Exit\n";
         std::cin >> d;
         switch (d) {
         case 1: {
@@ -49,20 +47,20 @@ void choice() {
 void cart() {
     int p = 0, c = 0, a = 0, d = 0;
     showmenu();
-    std::cout << "Какую позицию вы хотите добавть в заказ?\n";
+    std::cout << "What position would you like to add at cart?\n";
     std::cin >> p;
-    std::cout << "Сколько порций вы хотите добавить?\n";
+    std::cout << "How many portions?\n";
     std::cin >> a;
-    //Тут в БД товаров переносится инфа какой товар и убавляет его количество
-    //Тут в БД заказа добавляется товар
+    //Here information goes to DB of goods and decreases amount
+    //Here information goes to cart DB
     while (c != 2) {
-        std::cout << "Хотите добавить что-то ещё?\n1.Да\n2.Нет\n";
+        std::cout << "Would you like to add something else?\n1.Yes\n2.No\n";
         std::cin >> c;
         if (c == 1) {
             cart();
         }
     }
-    std::cout << "Хотите оплатить заказ или сделать что-то ещё?\n";
+    std::cout << "Whould you like to pay the order or to do something else?\n1.Pay\n2.Something else\n";
     std::cin >> d;
     switch (d) {
     case 1: {
@@ -76,26 +74,26 @@ void cart() {
 }
 
 void showmenu() {
-    //Тут из БД товаров выводятся товары
+    //Here goods from DB of goods are withdrawn
 }
 
 void orderhistory() {
-    //Тут из БД истории выводятся заказы
+    //Here order from order history DB are withdrawn
 }
 
 void payment() {
     int sum = 0;
-    //Тут из бд заказа выводится заказ
-    std::cout << "Сумма вашего заказа " << sum;
-    //Тут происходит оплата
+    //Here all goods in cart are withdrawn
+    std::cout << "Amount to pay: " << sum;
+    //Here goes payment
     issue();
-    //Тут из БД заказа инфа переносится в БД истории заказов
+    //Here information from cart goes to DB of orders
 }
 
 void showcart() {
     int pay;
-    //Тут из бд заказа выводится заказ
-    std::cout << "Хотите оплатить заказ?\n1.Да\n2.Нет\n";
+    //Here information from cart is withdrawn
+    std::cout << "Whould you like to pay the order?\n1.Yes\n2.No\n";
     std::cin >> pay;
     switch (pay) {
     case1: {
@@ -110,5 +108,5 @@ case2: {
 }
 
 void issue() {
-    //Функция выдачи заказа
+    //Function of issueing an order
 }
