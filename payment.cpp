@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iostream>
 #include <vector>
 #include <string>
 #include<fstream>
@@ -16,38 +15,54 @@ private:
 public:
 	Payment() {
 		username = cardbalance = 0;
-	}
-
+	};
 	Payment(string _username, int _cardbalance) {
 		username = _username;
 		cardbalance = _cardbalance;
 	}
-	bool checkbalance(string _username, int sum) {
+
+	static void checkbalance(Payment obj, int sum) {
 		int i = 0;
-		ifstream paymentfile;
-		paymentfile.open("Data/payment.dbase");
-		Payment test;
+		string _username;
+		int _cardbalance;
+		bool flag = false;
+		ifstream _paymentfile;
+		_paymentfile.open("payment.dbase");
+		_username = obj.username;
+		_cardbalance = obj.cardbalance;
 		vector<Payment> testarr;
-		while (paymentfile.read((char*)&test, sizeof(test))) {
-			testarr.push_back(test);
+		while (_paymentfile.read((char*)&obj, sizeof(Payment))) {
+			testarr.push_back(obj);
 		}
-		paymentfile.close();
-		while (testarr[i].username != _username) {
-			i++;
+		_paymentfile.close();
+		for (int i = 0; i < testarr.size(); i++) {
+			if (testarr[i].username == _username) {
+				testarr[i].username = _username;
+				flag = true;
+				break;
+			}
 		}
-		if (testarr[i].cardbalance >= sum)
-			return true;
+		if (flag) {
+			if (testarr[i].cardbalance >= sum)
+				cout << "Deneg dostato4no\n";
+			else
+				cout << "Deneg net ili vas net v sisteme\n";
+		}
 		else
-			return false;
+			cout << "Deneg net ili vas net v sisteme\n";
 	}
-	void addtodb(string _username, int _cardbalance) {
-		Payment test;
-		test.username = _username;
-		test.cardbalance = _cardbalance;
+
+	void addtodb() {
+		Payment obj;
+		obj.username = username;
+		obj.cardbalance = cardbalance;
 		ofstream paymentfile;
-		paymentfile.open("Data/payment.dbase", ofstream::app);
-		paymentfile.write((char*)&test, sizeof(Payment));
+		paymentfile.open("payment.dbase", ofstream::app);
+		paymentfile.write((char*)&obj, sizeof(Payment));
 		paymentfile.close();
 	}
 
+	void print() {
+		cout << username << " " << cardbalance << endl;
+	}
 };
