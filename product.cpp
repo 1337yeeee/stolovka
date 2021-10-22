@@ -6,11 +6,11 @@ using namespace std;
 
 
 class Product {
-protected:
+public:
 	string name;
 	int price;
 	int id;
-public:
+
 	Product() {
 		;
 	}
