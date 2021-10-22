@@ -89,12 +89,22 @@ public:
 
 	static void infotoDB(vector<Order>& massive){
 		ofstream out;
-		out.open("Data\\orders.dbase");
+		out.open("Data/orders.dbase");
 		for(int i = 0; i<massive.size(); i++){
 			out << massive[i].infoboutOrder() << endl;
 		}
 		out.close();
 	}
+	/*
+	static void infofromDB(vector<Order>& massive){
+		ifstream in;
+		string line;
+		in.open("Data/orders.dbase");
+		while(getline(in, line)){
+
+		}
+	}
+	*/
 
 };
 int main(){
