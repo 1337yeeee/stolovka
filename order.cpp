@@ -14,7 +14,9 @@ public:
 	int id_order;
 public:
 	//dlya <typeOfClass>
-	Order();
+	Order(){
+
+	}
 	
 	//konstruktor bez exampler Product
 	Order(string name, int price, int id_product, int id_order = 0, time_t seconds = time(NULL)) :  Product(name, price, id) {
@@ -89,31 +91,26 @@ public:
 
 	static void infotoDB(vector<Order>& massive){
 		ofstream out;
-		out.open("Data/orders.dbase");
+		out.open("Data/orders.dbase", ofstream::app);
 		for(int i = 0; i<massive.size(); i++){
-			out << massive[i].infoboutOrder() << endl;
+			out.write((char*)&massive[i], sizeof(Order));
 		}
 		out.close();
 	}
-	/*
+/*
 	static void infofromDB(vector<Order>& massive){
 		ifstream in;
-		string line;
 		in.open("Data/orders.dbase");
-		while(getline(in, line)){
-
+		
+		int i = 0;
+		massive.push_back(Order());
+		while(in.read((char*)&massive[i], sizeof(Order))){
+			i++;
+			massive.push_back(Order());
 		}
+		in.close();
 	}
-	*/
-
+*/
 };
 int main(){
-	Order a("sosiska", 150, 1, 1);
-	Order b("sardelka", 200, 3,2);
-	Order c("kotleta", 100,2,3);
-	vector<Order> massive;
-	massive.push_back(a);
-	massive.push_back(b);
-	massive.push_back(c);
-	Order::infotoDB(massive);
 }
