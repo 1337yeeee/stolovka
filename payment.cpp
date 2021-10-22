@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iostream>
 #include <vector>
 #include <string>
 #include<fstream>
@@ -35,6 +36,14 @@ public:
 		else
 			return false;
 	}
-
+	void addtodb(string _username, int _cardbalance) {
+		Payment test;
+		test.username = _username;
+		test.cardbalance = _cardbalance;
+		ofstream paymentfile;
+		paymentfile.open("Data/payment.dbase", ofstream::app);
+		paymentfile.write((char*)&test, sizeof(Payment));
+		paymentfile.close();
+	}
 
 };
