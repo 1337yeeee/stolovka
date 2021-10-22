@@ -27,7 +27,7 @@ public:
 		int _cardbalance;
 		bool flag = false;
 		ifstream _paymentfile;
-		_paymentfile.open("payment.dbase");
+		_paymentfile.open("Data/payment.dbase");
 		_username = obj.username;
 		_cardbalance = obj.cardbalance;
 		vector<Payment> testarr;
@@ -57,7 +57,7 @@ public:
 		obj.username = username;
 		obj.cardbalance = cardbalance;
 		ofstream paymentfile;
-		paymentfile.open("payment.dbase", ofstream::app);
+		paymentfile.open("Data/payment.dbase", ofstream::app);
 		paymentfile.write((char*)&obj, sizeof(Payment));
 		paymentfile.close();
 	}
