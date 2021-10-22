@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <product.cpp>
+#include "product.cpp"
 #include <string>
+#include <fstream>
 using namespace std;
 
 
@@ -86,4 +87,23 @@ public:
 		return object.infoboutOrder();
 	}
 
+	static void infotoDB(vector<Order>& massive){
+		ofstream out;
+		out.open("Data\\orders.dbase");
+		for(int i = 0; i<massive.size(); i++){
+			out << massive[i].infoboutOrder() << endl;
+		}
+		out.close();
+	}
+
 };
+int main(){
+	Order a("sosiska", 150, 1, 1);
+	Order b("sardelka", 200, 3,2);
+	Order c("kotleta", 100,2,3);
+	vector<Order> massive;
+	massive.push_back(a);
+	massive.push_back(b);
+	massive.push_back(c);
+	Order::infotoDB(massive);
+}
