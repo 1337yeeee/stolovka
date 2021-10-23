@@ -7,14 +7,14 @@ using namespace std;
 
 
 class User {
-protected:
-	int userID;
-	int phoneNumber;
-	string userName;
 private:
 	string login;
 	string password;
 public:
+	int userID;
+	int phoneNumber;
+	string userName;
+
 	User(vector<User> base, string _userName, string _login, string _password, int _phoneNumber) {
 		int tempID = 0;
 		this->userName = _userName;
