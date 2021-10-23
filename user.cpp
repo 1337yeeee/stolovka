@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 
@@ -30,45 +31,45 @@ public:
 	User(){;}
 
 	bool changeName(string _password, string _userName) {
-		if(_password==this->password) {
-			this->userName = _userName;
+		if(_password==password) {
+			userName = _userName;
 			return true;
 		} else return false;
 	}
 
 	bool changePassword(string _login, string _password, int _phoneNumber) {
-		if(_login==this->login && _phoneNumber==this->phoneNumber) {
-			this->password = _password;
+		if(_login==login && _phoneNumber==phoneNumber) {
+			password = _password;
 			return true;
 		} else return false;
 	}
 
 	bool changePhoneNumber(string _login, string _password, int _phoneNumber) {
-		if(_login==this->login && _password==this->password) {
-			this->phoneNumber = _phoneNumber;
+		if(_login==login && _password==password) {
+			phoneNumber = _phoneNumber;
 			return true;
 		} else return false;
 	}
 
 	bool changeLogin(string _login, string _password, int _phoneNumber) {
-		if(_phoneNumber==this->phoneNumber && _password==this->password) {
-			this->login = _login;
+		if(_phoneNumber==phoneNumber && _password==password) {
+			login = _login;
 			return true;
 		} else return false;
 	}
 
 	bool deleteUser(vector<User> &base,string _login, string _password, int _phoneNumber) {
-		if(_phoneNumber==this->phoneNumber && _password==this->password\
-		&& _login==this->login) {
+		if(_phoneNumber==phoneNumber && _password==password\
+		&& _login==login) {
 			for(int i=0; i<base.size(); i++)
-			if(base[i].userID == this->userID)
+			if(base[i].userID == userID)
 				base.erase(base.cbegin()+i);
 			return true;
 		} else return false;
 	}
 
 	int operator == (User object) {
-		if(this->userID == object.userID) return 1;
+		if(userID == object.userID) return 1;
 		else return 0;
 	}
 
@@ -78,5 +79,14 @@ public:
 		cout<<this->password<<"|";
 		cout<<this->phoneNumber<<"|";
 		cout<<this->userID<<endl;
+	}
+
+	static void writeVectortoDB(vector<User>& base) {
+		ofstream userBase;
+		userBase.open("Data/accounts.dbase");
+		for (int i = 0; i < base.size(); i++) {
+			userBase.write((char*)&base[i], sizeof(User));
+		}
+		userBase.close();
 	}
 };
