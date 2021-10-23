@@ -112,6 +112,30 @@ public:
 		paymentfile.close();
 	}
 
+	/*//read object from DB
+	void readObjFromDB(){
+		Payment test;
+		ifstream pfile;
+		pfile.open("Data/payment.dbase");
+		pfile.read((char*)&test, sizeof(Payment));
+		pfile.close();
+		this->username = test.username;
+		this->cardbalance = test.cardbalance;
+		this->userID = test.userID ;
+	}*/
+
+	/*//read vector from DB
+	static void readVectorFromDB(vector<Payment> testarr){
+		int i = 0;
+		ifstream pfile;
+		pfile.open("Data/payment.dbase");
+		while(pfile.read((char*)&testarr[i], sizeof(Payment))){
+			testarr.push_back(testarr[i]);
+			i++;
+		}
+		pfile.close();
+	}*/
+
 	void print() {
 		cout << username << " " << cardbalance << " " << userID << endl;
 	}
