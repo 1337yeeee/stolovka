@@ -32,7 +32,7 @@ public:
 	}
 
 	//checking if user has enough money from DB
-	static void checkbalanceFromDB(Payment test, int sum) {
+	static bool checkbalanceFromDB(Payment test, int sum) {
 		int i;
 		string _username;
 		int _cardbalance, _userID;
@@ -50,23 +50,22 @@ public:
 		_paymentfile.close();
 		for (i = 0; i < testarr.size(); i++) {
 			if (testarr[i].username == _username) {
-				testarr[i].username = _username;
 				flag = true;
 				break;
 			}
 		}
 		if (flag) {
 			if (testarr[i].cardbalance >= sum)
-				cout << "Deneg dostato4no\n";
+				return true;
 			else
-				cout << "Deneg net ili vas net v sisteme\n";
+				return false;
 		}
 		else
-			cout << "Deneg net ili vas net v sisteme\n";
+			return true;
 	}
 
 	//check if user has enough money from vector
-	static void checkbalanceFromVector(vector<Payment>& testarr, Payment test, int sum) {
+	static bool checkbalanceFromVector(vector<Payment>& testarr, Payment test, int sum) {
 		int i;
 		string _username;
 		int _cardbalance, _userID;
@@ -77,19 +76,18 @@ public:
 		_userID = test.userID;
 		for (i = 0; i < testarr.size(); i++) {
 			if (testarr[i].username == _username) {
-				testarr[i].username = _username;
 				flag = true;
 				break;
 			}
 		}
 		if (flag) {
 			if (testarr[i].cardbalance >= sum)
-				cout << "Deneg dostato4no\n";
+				return true;
 			else
-				cout << "Deneg net ili vas net v sisteme\n";
+				return false;
 		}
 		else
-			cout << "Deneg net ili vas net v sisteme\n";
+			return false;
 	}
 
 	//add object to DB
